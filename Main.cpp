@@ -1,6 +1,13 @@
 #include <gmpxx.h>  //GMP library
 #include <cstdio> // For Printing to file
+#include <iostream> //pause
 
+int pause()
+{
+	std::cout << "Press enter to exit...";
+	std::cin.ignore();
+	return 0;
+}
 int main () //Start main function
 {
     //Set precision as variabels
@@ -50,6 +57,7 @@ int main () //Start main function
     fp = fopen("pi.txt","w");
     gmp_fprintf(fp, "%0.1048576Ff\n", pi.get_mpf_t());
     
+    pause();
     // End Code
     return 0;
 }
