@@ -12,7 +12,7 @@ File name: pi.txt<br>
 
 Source: Main.cpp; lines: 14-15;
 ``` c++
-int prec = 10485760; 
+long int prec = 10485760; 
 int loops = 20;
 ```
 The formula says it's accuracy increases by a power of 2 decimal places each iteration, therefore<br>
@@ -41,7 +41,7 @@ Line 58:
  So code becomes:
  
  ``` c++
- int prec = 10737418240;
+ long int prec = 10737418240;
  int loops = 30;
  /* ...skipping to line 58 */
  gmp_fprintf(fp, "%0.1073741824Ff\n", pi.get_mpf_t());
