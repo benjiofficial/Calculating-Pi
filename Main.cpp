@@ -11,7 +11,7 @@ int pause()
 int main () //Start main function
 {
     //Set precision as variabels
-    int prec = 10485760; // 2^loops * 10 (* 10 for extra accuracy)
+    long int prec = 10485760; // 2^loops * 10 (* 10 for extra accuracy)
     int loops = 20;
 
     //Tell GMP the precision needed
