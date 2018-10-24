@@ -1,5 +1,5 @@
 # Variable usage
-
+<center>
 <table>
 <tr>
     <th>Variable Name</th>
@@ -63,3 +63,4 @@
     <td>final result of pi</td>
 </tr>
 </table>
+</center>
