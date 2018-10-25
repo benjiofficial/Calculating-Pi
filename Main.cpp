@@ -1,21 +1,27 @@
 #include <gmpxx.h>  //GMP library
 #include <cstdio> // For Printing to file
 #include <iostream> //pause
+#include <math.h> // log2
+#include <string> //for c_str()
 
+using namespace std;
 int pause()
 {
-	std::cout << "Press enter to exit...";
-	std::cin.ignore();
+	cout << "Press enter to exit...";
+	cin.ignore();
 	return 0;
 }
 int main () //Start main function
 {
+    long int User_Prec; // Declare variable user_Precision
+    cout << "How many decimal places of pi would you like?: ";
+    cin >> User_Prec;
+    string tmp = "%0." + to_string(User_Prec)+ "Ff\n";
+    const char * File_prec= tmp.c_str();
     //Set precision as variabels
-    long int prec = 10485760; // 2^loops * 10 (* 10 for extra accuracy)
-    int loops = 20;
-
+    int loops = log2(User_Prec) + 1;
     //Tell GMP the precision needed
-    mpf_set_default_prec(prec);
+    mpf_set_default_prec(User_Prec * 10);
 
     //Decalre variables (including temporary ones)
     mpf_class a, b, t, a_next, b_next, t_next, temp, pi;
@@ -26,7 +32,7 @@ int main () //Start main function
     mpf_sqrt(b.get_mpf_t(), b.get_mpf_t()); //square root
     t  = 0.25;
     long int p = 1;
-   
+    
     /*
      Create loop and loop counter (n) 
     */
@@ -50,12 +56,12 @@ int main () //Start main function
     pi = temp * temp / t;
 
     // Print to console
-    gmp_printf ("%.100Ff\n", pi.get_mpf_t());
+    gmp_printf ("%0.100Ff\n", pi.get_mpf_t());
     
     // Open file 
     FILE *fp;
     fp = fopen("pi.txt","w");
-    gmp_fprintf(fp, "%0.1048576Ff\n", pi.get_mpf_t());
+    gmp_fprintf(fp, File_prec, pi.get_mpf_t());
     
     pause();
     // End Code

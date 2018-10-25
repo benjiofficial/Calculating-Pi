@@ -7,14 +7,24 @@
     <th>Stores</th>
 </tr>
 <tr>
-    <td text-align="center">loops</td>
-    <td text-align="center">int</td>
-    <td text-align="center">log₂(accuracy of pi)</td>
+    <td text-align="center">tmp</td>
+    <td text-align="center">string</td>
+    <td text-align="center">"%0.UserAccuracyFf\n"</td>
 </tr>
 <tr>
-    <td text-align="center"> prec</td>
+    <td text-align="center">File_prec</td>
+    <td text-align="center">const char *</td>
+    <td text-align="center">"%0.UserAccuracyFf\n" converted</td>
+</tr>
+<tr>
+    <td text-align="center">loops</td>
+    <td text-align="center">int</td>
+    <td text-align="center">log₂(User_prec) + 1</td>
+</tr>
+<tr>
+    <td text-align="center">User_prec</td>
     <td text-align="center">long int</td>
-    <td text-align="center">gmp_precision</td>
+    <td text-align="center">Desired Precision</td>
 </tr>
 <tr>
     <td text-align="center">p</td>
