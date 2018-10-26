@@ -3,6 +3,7 @@
 #include <iostream> //pause
 #include <math.h> // log2
 #include <string> //for c_str()
+#include <iomanip> //setprecision
 
 using namespace std;
 int pause()
@@ -32,11 +33,13 @@ int main () //Start main function
     mpf_sqrt(b.get_mpf_t(), b.get_mpf_t()); //square root
     t  = 0.25;
     long int p = 1;
-    
+    double complete;
+    cout << setprecision(0);
+    cout << fixed;
     /*
      Create loop and loop counter (n) 
     */
-    for(int n = 0; n < loops; n++) //n++ increments n. so on every loop it increases in by 1; 
+    for(int n = 0; n <= loops; n++) //n++ increments n. so on every loop it increases in by 1; 
     {
         //Set next values according to Gauss-Legendre formula
         a_next = (a + b)/2;
@@ -44,17 +47,19 @@ int main () //Start main function
         mpf_sqrt(b_next.get_mpf_t(), b_next.get_mpf_t());
         temp = a - a_next;
         t_next = t - p * temp * temp;
-
+        complete = (n / (log2(User_Prec) + 1) ) * 100;
+        
         //Set values of old variables to values of new variables
         a = a_next;
         b = b_next;
         t = t_next;
         p = 2 * p;
+        cout << complete << '%' << endl;
     }
     //Final Maths
     temp = (a + b) / 2;
     pi = temp * temp / t;
-
+    cout << "100%" << endl;
     // Print to console
     gmp_printf ("%0.100Ff\n", pi.get_mpf_t());
     

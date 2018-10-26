@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calculating Pi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="Code.css">
+  </head>
+  <body>
+    <h1>Calculating Pi</h1>
+    <br>
+    <br>
+    <br>
+    <div class="whitebg">
+        <center><a class="Download" href="https://github.com/benjiofficial/Calculating-Pi">Download Source Code</a><span class="box">   </span><a class="Download" href="https://github.com/benjiofficial/Calculating-Pi/releases">Download Release</a></center>
+      <h2>The Formula</h2>
+      <img src="img/image001.png" height="60px" style="padding-left: 5%;">
+      <h3>Where: </h3>
+      <img src="img/image003.png" height="100px" style="padding-left: 5%;"> <br>
+      <img src="img/image005.png" height="100px" style="padding-left: 5%;"> <br>
+      <br>
+      <h2>Code for the Formula Only</h2>
+      <pre style='color:#000000;background:#FFFFF0;'>
+          <span style='color:#00796B; '>#</span><span style='color:#00796B; '>include </span><span style='color:#e91e63; '>&lt;</span><span style='color:#40015a; '>gmpxx.h</span><span style='color:#e91e63; '>></span><span style='color:#00796B; '> </span><span style='color:#696969; '>//GMP library</span>
+          <span style='color:#00796B; '>#</span><span style='color:#00796B; '>include </span><span style='color:#e91e63; '>&lt;</span><span style='color:#40015a; '>cstdio</span><span style='color:#e91e63; '>></span><span style='color:#00796B; '> </span><span style='color:#696969; '>// For Printing to file</span>
+          <span style='color:#e91e63; font-weight:bold; '>int</span> <span style='color:#400000; '>main</span> <span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#696969; '>//Start main function</span>
+          <span style='color:#800080; '>{</span>
+          <span style='color:#696969; '>//Set precision as variabels</span>
+          <span style='color:#e91e63; font-weight:bold; '>int</span> prec <span style='color:#808030; '>=</span> <span style='color:#008c00; '>10485760</span><span style='color:#800080; '>;</span>
+          <span style='color:#e91e63; font-weight:bold; '>int</span> loops <span style='color:#808030; '>=</span> <span style='color:#008c00; '>20</span><span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>//Tell GMP the precision needed</span>
+          mpf_set_default_prec<span style='color:#808030; '>(</span>prec<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>//Decalre variables (including temporary ones)</span>
+          mpf_class a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>,</span> t<span style='color:#808030; '>,</span> a_next<span style='color:#808030; '>,</span> b_next<span style='color:#808030; '>,</span> t_next<span style='color:#808030; '>,</span> temp<span style='color:#808030; '>,</span> pi<span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>//Assign values to variables</span>
+          a <span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>
+          b <span style='color:#808030; '>=</span> <span style='color:#008000; '>0.5</span><span style='color:#800080; '>;</span> <span style='color:#696969; '>//set value to half and then square root</span>
+          mpf_sqrt<span style='color:#808030; '>(</span>b<span style='color:#808030; '>.</span>get_mpf_t<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>,</span> b<span style='color:#808030; '>.</span>get_mpf_t<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span> <span style='color:#696969; '>//square root</span>
+          t <span style='color:#808030; '>=</span> <span style='color:#008000; '>0.25</span><span style='color:#800080; '>;</span>
+          <span style='color:#e91e63; font-weight:bold; '>long</span> <span style='color:#e91e63; font-weight:bold; '>int</span> p <span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>/*</span>
+          <span style='color:#696969; '>Create loop and loop counter (n)</span>
+          <span style='color:#696969; '>*/</span>
+          <span style='color:#e91e63; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#e91e63; font-weight:bold; '>int</span> n <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> n <span style='color:#808030; '>&lt;</span> loops<span style='color:#800080; '>;</span> n<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> <span style='color:#696969; '>//n++ increments n. so on every loop it increases in by 1;</span>
+          <span style='color:#800080; '>{</span>
+          <span style='color:#696969; '>//Set next values according to Gauss-Legendre formula</span>
+          a_next <span style='color:#808030; '>=</span> <span style='color:#808030; '>(</span>a <span style='color:#808030; '>+</span> b<span style='color:#808030; '>)</span><span style='color:#808030; '>/</span><span style='color:#008c00; '>2</span><span style='color:#800080; '>;</span>
+          b_next <span style='color:#808030; '>=</span> <span style='color:#808030; '>(</span>a <span style='color:#808030; '>*</span> b<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+          mpf_sqrt<span style='color:#808030; '>(</span>b_next<span style='color:#808030; '>.</span>get_mpf_t<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>,</span> b_next<span style='color:#808030; '>.</span>get_mpf_t<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+          temp <span style='color:#808030; '>=</span> a <span style='color:#808030; '>-</span> a_next<span style='color:#800080; '>;</span>
+          t_next <span style='color:#808030; '>=</span> t <span style='color:#808030; '>-</span> p <span style='color:#808030; '>*</span> temp <span style='color:#808030; '>*</span> temp<span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>//Set values of old variables to values of new variables</span>
+          a <span style='color:#808030; '>=</span> a_next<span style='color:#800080; '>;</span>
+          b <span style='color:#808030; '>=</span> b_next<span style='color:#800080; '>;</span>
+          t <span style='color:#808030; '>=</span> t_next<span style='color:#800080; '>;</span>
+          p <span style='color:#808030; '>=</span> <span style='color:#008c00; '>2</span> <span style='color:#808030; '>*</span> p<span style='color:#800080; '>;</span>
+          <span style='color:#800080; '>}</span>
+          <span style='color:#696969; '>//Final Maths</span>
+          temp <span style='color:#808030; '>=</span> <span style='color:#808030; '>(</span>a <span style='color:#808030; '>+</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>/</span> <span style='color:#008c00; '>2</span><span style='color:#800080; '>;</span>
+          pi <span style='color:#808030; '>=</span> temp <span style='color:#808030; '>*</span> temp <span style='color:#808030; '>/</span> t<span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>// Print to console</span>
+          gmp_printf <span style='color:#808030; '>(</span><span style='color:#e91e63; '>"</span><span style='color:#0000e6; '>%.100Ff</span><span style='color:#0f69ff; '>\n</span><span style='color:#e91e63; '>"</span><span style='color:#808030; '>,</span> pi<span style='color:#808030; '>.</span>get_mpf_t<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>// Open file</span>
+
+          <span style='color:#603000; '>FILE</span> <span style='color:#808030; '>*</span>fp<span style='color:#800080; '>;</span>
+          fp <span style='color:#808030; '>=</span> <span style='color:#603000; '>fopen</span><span style='color:#808030; '>(</span><span style='color:#e91e63; '>"</span><span style='color:#0000e6; '>pi.txt</span><span style='color:#e91e63; '>"</span><span style='color:#808030; '>,</span><span style='color:#e91e63; '>"</span><span style='color:#0000e6; '>w</span><span style='color:#e91e63; '>"</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+          gmp_fprintf<span style='color:#808030; '>(</span>fp<span style='color:#808030; '>,</span> <span style='color:#e91e63; '>"</span><span style='color:#0000e6; '>%0.1048576Ff</span><span style='color:#0f69ff; '>\n</span><span style='color:#e91e63; '>"</span><span style='color:#808030; '>,</span> pi<span style='color:#808030; '>.</span>get_mpf_t<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+          <span style='color:#696969; '>// End Code</span>
+          <span style='color:#e91e63; font-weight:bold; '>return</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
+          <span style='color:#800080; '>}</span>
+          </pre>
+          <h2>Contributing</h2>
+          <p style="padding-left: 5%; ">I am open to any ideas, if you have please send them to <a href="mailto: blearb.github@outlook.com" style="text-decoration: none; color:#1976D2;">blearb.github@outlook.com</a></p>
+    </div>
+  
+
+</body>
+</html>
